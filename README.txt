@@ -6,7 +6,7 @@ Zenphoto plugin to add noCaptcha reCaptcha functionality to forms.
 
 Instructions:
 
-1) Add nocapture_recapture.php to Zenphoto plugins folder. 
+1) Add nocaptcha_recaptcha.php to Zenphoto plugins folder. 
 2) Enable nocaptcha_recaptcha plugin (can be found under Plugins > Spam > nocaptcha_recaptcha). 
     Note: you must disable other reCaptcha plugins before nocaptcha_recaptcha can be enabled.
 3) Get reCaptcha keys from here: https://www.google.com/recaptcha/intro/index.html
