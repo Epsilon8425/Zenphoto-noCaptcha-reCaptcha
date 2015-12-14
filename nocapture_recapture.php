@@ -7,7 +7,7 @@
  * This plugin adds noCapture reCapture functionality to Zenphoto forms.
  *
  * @author Ben Feather (Epsilon)
- * @version 1.0.1
+ * @version 1.0.0
  * @package plugins
  * @subpackage spam
  *
@@ -16,7 +16,7 @@
 $plugin_is_filter = 5 | CLASS_PLUGIN;
 $plugin_description = gettext("Add Google noCapture reCapture (checkbox reCapture) to Zenphoto forms.");
 $plugin_author = gettext("Ben Feather (Epsilon)");
-$plugin_version = '1.0.0';
+$plugin_version = '1.0.1';
 $plugin_URL = '';
 $plugin_disable = ($_zp_captcha->name && $_zp_captcha->name != 'nocaptcha_recaptcha') ? sprintf(gettext('Only one Captcha handler plugin may be enabled. <a href="#%1$s"><code>%1$s</code></a> is already enabled.'), $_zp_captcha->name) : '';
 $option_interface = 'noCaptcha_reCaptcha';
@@ -41,13 +41,13 @@ class nocaptcha_recaptcha extends _zp_captcha {
 							'key'			=> 'ncrc_public_key',
 							'type'			=> OPTION_TYPE_TEXTBOX,
 							'order'			=> 1,
-							'desc'			=> gettext_pl('Enter you reCaptcha public key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
+							'desc'			=> gettext_pl('Enter your reCaptcha public key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
 						// Input for reCapture private key
 						gettext_pl('Private (Secret) Key:', 'nocaptcha_recaptcha')  => array(
 							'key'			=> 'ncrc_private_key',
 							'type'			=> OPTION_TYPE_TEXTBOX,
 							'order'			=> 2,
-							'desc'			=> gettext_pl('Enter you reCaptcha private key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
+							'desc'			=> gettext_pl('Enter your reCaptcha private key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
 						// Dropdown for reCapture theme
 						gettext_pl('Widget Theme:', 'nocaptcha_recaptcha') => array(
 							'key'			=> 'ncrc_theme',
@@ -67,7 +67,7 @@ class nocaptcha_recaptcha extends _zp_captcha {
 													gettext_pl('Audio', 'nocaptcha_recaptcha')	 => 'audio',
 													gettext_pl('Image', 'nocaptcha_recaptcha')	 => 'image'
 											   ),
-							'desc'			=> gettext_pl('Choose the type of reCapture you want to use. Audio: only requires user to select checkbox. Image: requires user to select the correct images from a list in addition to selecting the checkbox.', 'nocaptcha_recaptcha')),
+							'desc'			=> gettext_pl('Choose the secondary verification method you would like to use.', 'nocaptcha_recaptcha')),
 						// Dropdown for reCapture size
 						gettext_pl('Widget Size:', 'nocaptcha_recaptcha') => array(
 							'key'			=> 'ncrc_size',
