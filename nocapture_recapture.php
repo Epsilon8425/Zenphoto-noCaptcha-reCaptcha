@@ -7,7 +7,7 @@
  * This plugin adds noCapture reCapture functionality to Zenphoto forms.
  *
  * @author Ben Feather (Epsilon)
- * @version 1.0.0
+ * @version 1.0.1
  * @package plugins
  * @subpackage spam
  *
@@ -28,7 +28,7 @@ class nocaptcha_recaptcha extends _zp_captcha {
 	// Sets defaults for dropdown options
 	function __construct() {
 		setOptionDefault('ncrc_theme', 'light');
-		setOptionDefault('ncrc_type', 'audio');
+		setOptionDefault('ncrc_type', 'image');
 		setOptionDefault('ncrc_size', 'normal');
 	}
 	
