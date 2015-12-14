@@ -7,7 +7,7 @@
  * This plugin adds noCapture reCapture functionality to Zenphoto forms.
  *
  * @author Ben Feather (Epsilon)
- * @version 1.0.0
+ * @version 1.0.1
  * @package plugins
  * @subpackage spam
  *
