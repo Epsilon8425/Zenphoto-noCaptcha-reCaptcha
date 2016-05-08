@@ -20,6 +20,9 @@ Tested with the following plugins:
 
 Changelog:
 
+v1.0.2:
+  * Miscellaneous changes
+
 v1.0.1:
   * Updated default for secondary verification
   * Fixed spelling mistakes in comments
