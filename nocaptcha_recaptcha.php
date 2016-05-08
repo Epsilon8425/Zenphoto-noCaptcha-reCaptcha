@@ -7,7 +7,7 @@
  * This plugin adds noCaptcha reCaptcha functionality to Zenphoto forms.
  *
  * @author Ben Feather (Epsilon)
- * @version 1.0.1
+ * @version 1.0.2
  * @package plugins
  * @subpackage spam
  *
@@ -16,8 +16,8 @@
 $plugin_is_filter = 5 | CLASS_PLUGIN;
 $plugin_description = gettext("Add Google noCaptcha reCaptcha (checkbox reCaptcha) to Zenphoto forms.");
 $plugin_author = gettext("Ben Feather (Epsilon)");
-$plugin_version = '1.0.1';
-$plugin_URL = '';
+$plugin_version = '1.0.2';
+$plugin_URL = 'https://github.com/Epsilon8425/Zenphoto-noCaptcha-reCaptcha';
 $plugin_disable = ($_zp_captcha->name && $_zp_captcha->name != 'nocaptcha_recaptcha') ? sprintf(gettext('Only one Captcha handler plugin may be enabled. <a href="#%1$s"><code>%1$s</code></a> is already enabled.'), $_zp_captcha->name) : '';
 $option_interface = 'noCaptcha_reCaptcha';
 
@@ -36,48 +36,53 @@ class nocaptcha_recaptcha extends _zp_captcha {
 	function getOptionsSupported() {
 		
 		$options = array(
-						// Input for reCaptcha public key
-						gettext_pl('Public (Site) Key:', 'nocaptcha_recaptcha') => array(
-							'key'			=> 'ncrc_public_key',
-							'type'			=> OPTION_TYPE_TEXTBOX,
-							'order'			=> 1,
-							'desc'			=> gettext_pl('Enter your reCaptcha public key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
-						// Input for reCaptcha private key
-						gettext_pl('Private (Secret) Key:', 'nocaptcha_recaptcha')  => array(
-							'key'			=> 'ncrc_private_key',
-							'type'			=> OPTION_TYPE_TEXTBOX,
-							'order'			=> 2,
-							'desc'			=> gettext_pl('Enter your reCaptcha private key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.', 'nocaptcha_recaptcha')),
-						// Dropdown for reCaptcha theme
-						gettext_pl('Widget Theme:', 'nocaptcha_recaptcha') => array(
-							'key'			=> 'ncrc_theme',
-							'type'			=> OPTION_TYPE_SELECTOR,
-							'order'			=> 3,
-							'selections'	=> array(
-													gettext_pl('Light', 'nocaptcha_recaptcha')	 => 'light',
-													gettext_pl('Dark', 'nocaptcha_recaptcha')	 => 'dark'
-											   ),
-							'desc'			=> gettext_pl('Choose the theme for your reCaptcha.', 'nocaptcha_recaptcha')),
-						// Dropdown for reCaptcha type
-						gettext_pl('Widget Type:', 'nocaptcha_recaptcha') => array(
-							'key'			=> 'ncrc_type',
-							'type'			=> OPTION_TYPE_SELECTOR,
-							'order'			=> 4,
-							'selections'	=> array(
-													gettext_pl('Audio', 'nocaptcha_recaptcha')	 => 'audio',
-													gettext_pl('Image', 'nocaptcha_recaptcha')	 => 'image'
-											   ),
-							'desc'			=> gettext_pl('Choose the secondary verification method you would like to use.', 'nocaptcha_recaptcha')),
-						// Dropdown for reCaptcha size
-						gettext_pl('Widget Size:', 'nocaptcha_recaptcha') => array(
-							'key'			=> 'ncrc_size',
-							'type'			=> OPTION_TYPE_SELECTOR,
-							'order'			=> 5,
-							'selections'	=> array(
-													gettext_pl('Normal', 'nocaptcha_recaptcha')	 => 'normal',
-													gettext_pl('Compact', 'nocaptcha_recaptcha')	 => 'compact'
-											   ),
-							'desc'			=> gettext_pl('Choose the size of the reCaptcha widget.', 'nocaptcha_recaptcha'))
+			// Input for reCaptcha public key
+			gettext('Public (Site) Key:') => array(
+				'key'			=> 'ncrc_public_key',
+				'type'			=> OPTION_TYPE_TEXTBOX,
+				'order'			=> 1,
+				'desc'			=> gettext('Enter your reCaptcha public key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.')
+			),
+			// Input for reCaptcha private key
+			gettext('Private (Secret) Key:')  => array(
+				'key'			=> 'ncrc_private_key',
+				'type'			=> OPTION_TYPE_TEXTBOX,
+				'order'			=> 2,
+				'desc'			=> gettext('Enter your reCaptcha private key here. Visit https://www.google.com/recaptcha/intro/index.html to obtain your keys.')
+			),
+			// Dropdown for reCaptcha theme
+			gettext('Widget Theme:') => array(
+				'key'			=> 'ncrc_theme',
+				'type'			=> OPTION_TYPE_SELECTOR,
+				'order'			=> 3,
+				'selections'	=> array(
+										gettext('Light')	=> 'light',
+										gettext('Dark')	 	=> 'dark'
+								   ),
+				'desc'			=> gettext('Choose the theme for your reCaptcha.')
+			),
+			// Dropdown for reCaptcha type
+			gettext('Widget Type:') => array(
+				'key'			=> 'ncrc_type',
+				'type'			=> OPTION_TYPE_SELECTOR,
+				'order'			=> 4,
+				'selections'	=> array(
+										gettext('Audio')	=> 'audio',
+										gettext('Image')	=> 'image'
+								   ),
+				'desc'			=> gettext('Choose the secondary verification method you would like to use.')
+			),
+			// Dropdown for reCaptcha size
+			gettext('Widget Size:') => array(
+				'key'			=> 'ncrc_size',
+				'type'			=> OPTION_TYPE_SELECTOR,
+				'order'			=> 5,
+				'selections'	=> array(
+										gettext('Normal')	=> 'normal',
+										gettext('Compact')	=> 'compact'
+								   ),
+				'desc'			=> gettext('Choose the size of the reCaptcha widget.')
+			)
 		);
 		
 		return $options;
@@ -88,7 +93,7 @@ class nocaptcha_recaptcha extends _zp_captcha {
 	function captchaHtml($publicKey, $theme, $type, $size){
 		
 		return '
-				<div class="g-recaptcha" data-sitekey="'.$publicKey.'" data-theme="'.$theme.'" data-type="'.$type.'" data-size="'.$size.'"></div>
+				<span class="g-recaptcha" data-sitekey="'.$publicKey.'" data-theme="'.$theme.'" data-type="'.$type.'" data-size="'.$size.'"></span>
 				<script src="https://www.google.com/recaptcha/api.js"></script>
 		';
 		
@@ -128,9 +133,9 @@ class nocaptcha_recaptcha extends _zp_captcha {
 		$size = getOption('ncrc_size');
 		
 		// Check for proper configuration of options
-		if (!getOption('ncrc_public_key')) {
+		if (!getOption('ncrc_public_key') || !getOption('ncrc_private_key')) {
 			
-			return array('input' => '', 'html' => '<p style="margin: 20px 0; padding: 20px; background-color: red; -webkit-border-radius: 10px; -moz-border-radius: 10px;border-radius: 10px;">' . gettext('reCAPTCHA keys are not configured properly. Visit <a href="https://www.google.com/recaptcha/intro/index.html" style="color:blue;">this link</a> to retrieve your reCaptcha keys then enter them in noCapture reCaptcha\'s options (found in Zenphoto Control Panel > Options > Plugins).') . '</p>', 'hidden' => '');
+			return array('input' => '', 'html' => '<div class="errorbox"><p>' . gettext('reCAPTCHA keys are not configured properly. Visit <a href="https://www.google.com/recaptcha/intro/index.html">this link</a> to retrieve your reCaptcha keys then enter them in noCapture reCaptcha\'s options (found in Zenphoto Control Panel > Options > Plugins).') . '</p></div>', 'hidden' => '');
 			
 		} 
 		else {
